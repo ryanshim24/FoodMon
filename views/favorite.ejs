@@ -1,0 +1,7 @@
+<ul>
+<% allFoods.forEach(function(food){ %>
+  <li>
+    Ingredient Lines: <%= JSON.parse(food.recipe).ingredientLines %>
+  </li>
+<% }); %>
+</ul>

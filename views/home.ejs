@@ -1,0 +1,49 @@
+<% include partials/header %>
+<link rel="stylesheet" href="stylesheets/main.css">
+<script src = "javascripts/main.js"></script>
+
+<h1>Hello, <%= user.username %> - welcome to our website.</h1>
+
+<a href="/logout" class="btn btn-danger">Log out here!</a>
+<br>
+<br>
+<p>
+
+<form action="/search" class = "awesomeSauce">
+  <input type="text" id = "foodTitle" name="foodTitle">
+  <input type="submit">
+</form>
+</p>
+
+<a class="btn btn-primary category" href="/search?foodTitle=Soups">Breakfast</a>
+<a class="btn btn-primary category" href="/search?foodTitle=Dessert">Lunch</a>
+<a class="btn btn-primary category" href="/search?foodTitle=Soups">Dinner</a>
+<a class="btn btn-primary category" href="/search?foodTitle=Soups">Dessert</a>
+
+
+<div class = "recipes">
+  <div class="round"></div>
+  <div class="recipe1 recipe"></div>
+  <div class="recipe2 recipe"></div>
+</div>
+
+<div class="info">
+  
+  
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    //Click on soups button
+    $(".category").on("click", foodMon.categoryClick);
+    //When one of the recipe class is clicked
+    $(".recipe").on("click", foodMon.recipeClick);
+  });
+</script>
+
+
+
+ 
+
+<% include partials/footer %>
+
