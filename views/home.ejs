@@ -1,36 +1,110 @@
 <% include partials/header %>
 <link rel="stylesheet" href="stylesheets/main.css">
+<link rel="stylesheet" href="stylesheets/sidebar.css">
 <script src = "javascripts/main.js"></script>
 
-<h1>Hello, <%= user.username %> - welcome to our website.</h1>
-
-<a href="/logout" class="btn btn-danger">Log out here!</a>
-<br>
-<br>
-<p>
-
-<form action="/search" class = "awesomeSauce">
-  <input type="text" id = "foodTitle" name="foodTitle">
-  <input type="submit">
-</form>
-</p>
-
-<a class="btn btn-primary category" href="/search?foodTitle=Soups">Breakfast</a>
-<a class="btn btn-primary category" href="/search?foodTitle=Dessert">Lunch</a>
-<a class="btn btn-primary category" href="/search?foodTitle=Soups">Dinner</a>
-<a class="btn btn-primary category" href="/search?foodTitle=Soups">Dessert</a>
-
-
-<div class = "recipes">
-  <div class="round"></div>
-  <div class="recipe1 recipe"></div>
-  <div class="recipe2 recipe"></div>
+<div class="navbar navbar-top" role="navigation">
+  <div class="container">       
+   <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="/">Foodmon</a>
+    </div>
+    <div class="navbar-collapse collapse" style="height: 1px;">
+      <ul class = "nav navbar-nav navbar-right">
+        <li><a href="/">Home</a></li>
+        <li><a href="/favorite">Victory</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
 </div>
+<!-- <div id="wrapper">
 
-<div class="info">
-  
-  
-</div>
+
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a href="#">
+          Start Bootstrap
+        </a>
+      </li>
+      <li>
+        <a href="#">Dashboard</a>
+      </li>
+      <li>
+        <a href="#">Shortcuts</a>
+      </li>
+      <li>
+        <a href="#">Overview</a>
+      </li>
+      <li>
+        <a href="#">Events</a>
+      </li>
+      <li>
+        <a href="#">About</a>
+      </li>
+      <li>
+        <a href="#">Services</a>
+      </li>
+      <li>
+        <a href="#">Contact</a>
+      </li>
+    </ul>
+  </div> -->
+
+
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <h1>Hello, <%= user.username %> - welcome to our website.</h1>
+
+      <a href="/logout" class="btn btn-danger">Log out here!</a>
+      <br>
+      <br>
+      <!-- <p>
+
+      <form action="/search" class = "awesomeSauce">
+        <input type="text" id = "foodTitle" name="foodTitle">
+        <input type="submit">
+      </form>
+      </p>
+      <p>
+
+      <form action="/yelp" class = "awesomeTaco">
+        <input type="text" id = "yelpTitle" name="yelpTitle">
+        <input type="submit">
+      </form>
+      </p> -->
+
+      <a class="btn btn-primary category" href="/search?foodTitle=Breakfast">Breakfast</a>
+      <a class="btn btn-primary category" href="/search?foodTitle=Lunch">Lunch</a>
+      <a class="btn btn-primary category" href="/search?foodTitle=Dinner">Dinner</a>
+      <a class="btn btn-primary category" href="/search?foodTitle=Dessert">Dessert</a>
+
+
+      <div class = "recipes">
+        <div class="round"></div>
+        <div class="recipe1 recipe"></div>
+        <div class="recipe2 recipe"></div>
+      </div>
+
+      <div class="info">
+        <div class="title"></div>
+        <div class="picture"></div>
+        <div class="ingredient"></div>
+        <div class="method"></div>
+        <div class="name"></div>
+        
+      </div>
+    </div>
+  </div>
+<!-- </div> -->
+
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -38,6 +112,10 @@
     $(".category").on("click", foodMon.categoryClick);
     //When one of the recipe class is clicked
     $(".recipe").on("click", foodMon.recipeClick);
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
   });
 </script>
 

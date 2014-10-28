@@ -1,3 +1,198 @@
-.recipe {
-  display: inline-block;
+/*HOME PAGE/LOGIN/SIGNUP*/
+
+.home {
+  background: url(http://foodporndaily.com/pictures/juicy-seared-salmon-sandwich-with-creamy-basil-pesto-and-grilled-glazed-zucchini-on-turkish-bread.jpg);
+  background-size: cover;
+  height: 100%;
+}
+.sign {
+  background: url(http://foodporndaily.com/pictures/thin-crust-pizza-mozzarella-sun-dried-tomatoes-olives-oregano.jpg);
+  background-size: cover;
+  height: 100%;
+}
+
+.login {
+  background: url(http://foodporndaily.com/pictures/cinnamon-sugar-coated-freshly-baked-donuts.jpg);
+  background-size: cover;
+  height: 100%;
+}
+.wrap {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.homePage{
+  font-family: 'Source Sans Pro', sans-serif;
+  color: white;
+  text-align: center;
+}
+.signPage{
+  font-family: 'Source Sans Pro', sans-serif;
+  color: white;
+  text-align: center;
+}
+.logPage {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.logo {
+  margin-top: 36px;
+}
+
+.homePage .header {
+  margin-top: 50px;
+  font-size: 48px;
+}
+
+.homePage .lead {
+  font-size: 20px;
+  margin-top: 70px;
+}
+
+.homePage .create {
+  display: block;
+  background-color: #D74820;
+  padding: 12px;
+  margin: 24px auto 20px;
+  width: 420px;
+  height: 72px;
+  font-size: 32px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+}
+
+.homePage .create:hover {
+  background-color: #AB3919;
+}
+
+.homePage .log {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 12px;
+  background-color: #0E9094;
+  margin: auto;
+  height: 72px;
+  width: 420px;
+  font-size: 32px;
+  border-radius: 8px;
+}
+
+.homePage .log:hover {
+  background-color: #0B7275;
+}
+
+.homePage .divider {
+  background: rgba(255,255,255,0.5);
+  height: 1px;
+  width: 420px;
+  margin: 20px auto;
+}
+
+.signPage .signLead {
+  margin-top: 50px;
+  font-size: 20px;
+}
+
+.signPage .yourName {
+  color: black;
+  display: block;
+  outline: 0;
+  width: 420px;
+  margin: 13px auto 0;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  padding: 20px;
+  border: 0;
+  border-bottom: 1px solid #CCCCCC;
+}
+.signPage .yourPass {
+  color: black;
+  outline: 0;
+  padding: 20px;
+  display: block;
+  width: 420px;
+  margin: auto;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border: 0;
+}
+
+.signPage .create {
+  display: block;
+  background-color: #D74820;
+  padding: 12px;
+  margin: 24px auto 20px;
+  width: 420px;
+  height: 72px;
+  font-size: 32px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  border: none;
+}
+
+.logPage .logLead {
+  margin-top: 50px;
+  font-size: 20px;
+}
+
+.logPage .yourName {
+  color: black;
+  display: block;
+  outline: 0;
+  width: 420px;
+  margin: 13px auto 0;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  padding: 20px;
+  border: 0;
+  border-bottom: 1px solid #CCCCCC;
+}
+.logPage .yourPass {
+  color: black;
+  outline: 0;
+  padding: 20px;
+  display: block;
+  width: 420px;
+  margin: auto;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border: 0;
+}
+
+.logPage .log {
+  display: block;
+  background-color: #0E9094;
+  padding: 12px;
+  margin: 24px auto 20px;
+  width: 420px;
+  height: 72px;
+  font-size: 32px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  border: none;
+}
+
+
+/*HOME PAGE*/
+
+
+
+
+
+
+
+footer {
+  color: white;
+  text-align: center;
+  margin-top: 35px;
 }

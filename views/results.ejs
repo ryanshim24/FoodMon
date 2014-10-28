@@ -1,17 +1,7 @@
 
 <% foodList.forEach(function(list){ %>
-
-<a href="/details/<%=list.id%>">
   <li>
-    <%= list.recipeName %>
+    <a href="/details/<%=list.id%>"><%= list.recipeName %></a>
   </li>
-</a>
 
-<div class = "image1">
-  
-</div>
-
-<div class = "image2">
-  
-</div>
 <% }); %>

@@ -9,7 +9,7 @@ foodMon.categoryClick = function(e){
   counter = 1; 
   e.preventDefault();
   //random number
-  var number = Math.floor((Math.random() * 200) + 1);
+  var number = Math.floor((Math.random() * 300) + 1);
   foodMon.category = this.innerText;
   console.log(this.innerText);
   //Goes through api with the searchTerm Soups starts at random place
@@ -33,6 +33,7 @@ foodMon.categoryClick = function(e){
     //empty() clears all child nodes so it's always clean from the start
     $('.recipe1').empty().append(img1); 
     $('.recipe2').empty().append(img2);
+
     var round = "<h2>Round 1</h2>";
     $('.round').empty().append(round);
 
@@ -84,6 +85,8 @@ foodMon.recipeClick = function(e) {
 ////////FUNCTIONS INSIDE FUNCTIONS!!!!!!
 foodMon.declareWinner = function(winNum){
   $('.recipes').empty();
+  $('.category').remove();
+  $('.awesomeSauce').remove();
 //Get the information from the local storage
   var taco = localStorage.getItem('recipe'+winNum);
   var nacho = JSON.parse(taco);
@@ -96,12 +99,15 @@ foodMon.declareWinner = function(winNum){
   // I append the ingredient lines and image into 
   //the div class info!
    var title = "<div><h1>Victory!!!</h1></div>";
-   $(".info").append(title);
-   $(".info").append(data.name);
+   $(".title").append(title);
    var img = "<img class = 'img-thumbnail' src =" + data.images[0].hostedLargeUrl +">";
+   $(".picture").append(img);
+   $(".ingredient").append(data.ingredientLines);
+   var method ="<a target='_blank' href="+data.source.sourceRecipeUrl+">How to Make it!</a>";
+   $(".method").append(method);
+   $(".name").append(data.name);
    var btn = "<a class= 'btn btn-primary' href='/favorite'>Victory Page</a>";
    var restart = "<a class= 'btn btn-primary' href='/home'>Restart</a>";
-   $(".info").append(img);
    $(".info").append(btn);
    $(".info").append(restart);
    //AJAX allows me to do app.post
@@ -119,7 +125,7 @@ foodMon.declareWinner = function(winNum){
 
 //Gets my new recipe for the one that got eliminated!
 foodMon.getRecipe = function(){
-  var number = Math.floor((Math.random() * 200) + 1);
+  var number = Math.floor((Math.random() * 350) + 1);
   var searchTerm = foodMon.category;
   var url= "http://api.yummly.com/v1/api/recipes?_app_id=d38fff6d&_app_key=effa46e418efdd042f6866b93906a8d0&q=" + searchTerm + "&maxResult=1&start="+number;
 

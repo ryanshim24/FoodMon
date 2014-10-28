@@ -1,0 +1,20 @@
+<% include partials/header %>
+<link rel="stylesheet" href="stylesheets/main.css">
+
+<a class="btn btn-primary category" href="/yelp?yelpTitle=Breakfast">Breakfast</a>
+<a class="btn btn-primary category" href="/yelp?yelpTitle=Lunch">Lunch</a>
+<a class="btn btn-primary category" href="/yelp?yelpTitle=Dinner">Dinner</a>
+<a class="btn btn-primary category" href="/yelp?yelpTitle=Dessert">Dessert</a>
+
+<br>
+
+<% yelpList.forEach(function(list){ %>
+  <li>
+    <img src="<%= list.image_url%>" alt="">
+    <br>
+    <%= list.name %>
+    <br>
+    <%= list.location.address %>
+  </li>
+
+<% }); %>

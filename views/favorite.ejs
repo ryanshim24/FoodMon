@@ -1,7 +1,17 @@
+<link rel="stylesheet" href="stylesheets/main.css">
 <ul>
 <% allFoods.forEach(function(food){ %>
   <li>
-    Ingredient Lines: <%= JSON.parse(food.recipe).ingredientLines %>
+    <!-- Picture: <%= JSON.parse(food.recipe).images[0].hostedSmallUrl %> -->
+    <img src="<%= JSON.parse(food.recipe).images[0].hostedMediumUrl %>" alt="">
+    <br>
+    <%= JSON.parse(food.recipe).name %>
+    <br>
+    <a target="_blank" href="<%= JSON.parse(food.recipe).source.sourceRecipeUrl %>">How to Make it!</a>
+
+    <form action="/favorite/<%= food.id %>?_method=delete" method="post">
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
   </li>
 <% }); %>
 </ul>

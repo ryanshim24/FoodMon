@@ -8,9 +8,15 @@ var express = require('express'),
     passportLocal = require("passport-local"),
     cookieParser = require("cookie-parser"),
     session = require("cookie-session"),
-    flash = require("connect-flash");
+    flash = require("connect-flash"),
+    yelp = require("yelp").createClient({
+      consumer_key: "hpYc3S2PYsXIXVjgATHYQQ",
+      consumer_secret: "d_gBYLzYlYptfv6sWNzxTkRShTQ",
+      token: "8IoJkXkJPIaWFIGV9UodUSnU8QxMWGIb",
+      token_secret: "xtIvSjixBg9ykXWv5dwz9rmamnE"});
     var morgan = require('morgan');
     var routeMiddleware = require("./config/routes");
+   
 
 
 // Middleware for ejs, grabbing HTML and including static files
@@ -143,10 +149,19 @@ app.post('/favorite', function(req,res){
   });
 });
 
+app.delete('/favorite/:id', function(req,res){
+  db.Food.find(req.params.id).done(function(err,food){
+   db.User.find(req.user.id).done(function(err,user){
+    user.removeFood(food);
+    res.redirect('/favorite');
+    });
+  });  
+});
+
 
 // Searching for recipes
 app.get('/search', function(req,res) { 
-  var number = Math.floor((Math.random() * 100) + 1);
+  var number = Math.floor((Math.random() * 350) + 1);
   var searchTerm = req.query.foodTitle;
   var url ="http://api.yummly.com/v1/api/recipes?_app_id=d38fff6d&_app_key=effa46e418efdd042f6866b93906a8d0&q=" + searchTerm + "&maxResult=50&start="+number;
 
@@ -171,7 +186,14 @@ app.get('/details/:id', function(req,res) {
   });
 });
 
-
+app.get('/yelp', function(req,res) { 
+  var searchTerm = req.query.yelpTitle;
+  yelp.search({term: searchTerm, location: "San Francisco"}, function(error, data) {
+    console.log(error);
+    console.log(data);
+    res.render("yelp",{yelpList: data.businesses});
+  });
+});
 
 var server = app.listen(3000, function() {
     console.log('Listening on port %d', server.address().port);
