@@ -1,7 +1,38 @@
+<% include partials/home.ejs %>
 
-<% foodList.forEach(function(list){ %>
-  <li>
-    <a href="/details/<%=list.id%>"><%= list.recipeName %></a>
-  </li>
+<div class="content" style="float: left;width: 50%; margin-top: 70px">
+  <div class="searchBar">
+    <form action="/search" class="awesomeSauce">
+      <input type="text" id="foodTitle" name="foodTitle" autofocus placeholder="Search for a Recipe?" class="search" 
+      <input type="submit" class="submit">
+    </form>
+  </div>
+</div>
 
-<% }); %>
+<div class="content" style="width: 50%; float: RIGHT; margin-top: 70px">
+  <div class="searchBar" style="background-color: #384452;">
+    <form action="/yelp" class="awesomeSauce">
+      <input type="text" id="yelpTitle" name="yelpTitle" autofocus placeholder="Search for a Restraunt?" class="search" 
+      <input type="submit" class="submit">
+    </form>
+  </div>
+</div>
+<br>
+
+
+
+<div class="results">
+  <ul>
+  <% foodList.forEach(function(list){ %>
+    <a href="/details/<%=list.id%>">
+      <li class="food cf">
+        <!-- <img src=<%=list.smallImageUrls%> alt=""> -->
+        <div class="title"><%= list.recipeName %></div>
+        <div class="rating">Rating: <%= list.rating %></div>
+      </li>
+    </a>
+  <% }); %>
+  </ul>
+</div>
+
+<% include partials/newFooter.ejs %>

@@ -27,15 +27,17 @@ foodMon.categoryClick = function(e){
     localStorage.setItem('recipe2', JSON.stringify(rec2));
 
     //I NOW HAVE ACCESS to the obj so I grab the images
-    var img1 = "<img style = 'width:200px' class = 'img-thumbnail' src =" + rec1.imageUrlsBySize[90] +">";
-    var img2 = "<img style = 'width:200px' class = 'img-thumbnail' src =" + rec2.imageUrlsBySize[90] +">";
+    var img1 = "<img style = 'width:200px' class = 'img-circle' src =" + rec1.imageUrlsBySize[90] +">";
+    var img2 = "<img style = 'width:200px' class = 'img-circle' src =" + rec2.imageUrlsBySize[90] +">";
     //I append img1 into the class recipe1/2
     //empty() clears all child nodes so it's always clean from the start
     $('.recipe1').empty().append(img1); 
     $('.recipe2').empty().append(img2);
 
-    var round = "<h2>Round 1</h2>";
+    var round = "Round 1 <br> <h4>Which would you rather prefer?</h4>";
     $('.round').empty().append(round);
+
+    $("body").animate({scrollTop: $(".searchBar").offset().top }, 2000);
 
   });
 };
@@ -46,7 +48,7 @@ foodMon.recipeClick = function(e) {
   //clicked grabs the specific node of the div i clicked
   //either recipe1 or recipe2
   var clicked = this;
-  var round = "<h2>Round "+ counter +"</h2>";
+  var round = "Round "+ counter +"<br><h4>Which would you rather prefer?</h4>";
   $('.round').empty().append(round);
 
   // Run the getRecipe function which brings me new data!
@@ -66,7 +68,7 @@ foodMon.recipeClick = function(e) {
     }
   });
   if (counter === 5){
-    round = "<h2>Final Round</h2>";
+    round = "Final Round <br><h4>Which would you rather prefer?</h4>";
     $('.round').empty().append(round);
   }
   //When the counter hit's five the next clikc is the winner!
@@ -85,8 +87,7 @@ foodMon.recipeClick = function(e) {
 ////////FUNCTIONS INSIDE FUNCTIONS!!!!!!
 foodMon.declareWinner = function(winNum){
   $('.recipes').empty();
-  $('.category').remove();
-  $('.awesomeSauce').remove();
+  $('.container1').remove();
 //Get the information from the local storage
   var taco = localStorage.getItem('recipe'+winNum);
   var nacho = JSON.parse(taco);
@@ -98,18 +99,22 @@ foodMon.declareWinner = function(winNum){
   $.getJSON(url, function(data){
   // I append the ingredient lines and image into 
   //the div class info!
-   var title = "<div><h1>Victory!!!</h1></div>";
-   $(".title").append(title);
+   var title = "Victory!!!";
+   $(".win").append(title);
    var img = "<img class = 'img-thumbnail' src =" + data.images[0].hostedLargeUrl +">";
-   $(".picture").append(img);
-   $(".ingredient").append(data.ingredientLines);
-   var method ="<a target='_blank' href="+data.source.sourceRecipeUrl+">How to Make it!</a>";
-   $(".method").append(method);
-   $(".name").append(data.name);
-   var btn = "<a class= 'btn btn-primary' href='/favorite'>Victory Page</a>";
-   var restart = "<a class= 'btn btn-primary' href='/home'>Restart</a>";
-   $(".info").append(btn);
-   $(".info").append(restart);
+   $(".bigPic").append(img);
+   $(".title").append(data.name);
+   $(".myRating").append("Rating: " + data.rating);
+   $(".cals").append("Calories: " + data.nutritionEstimates[0].value);
+   $(".flavors").append("Flavors: <p>Bitter: "+data.flavors.Bitter+"</p><p>Meaty: "+data.flavors.Meaty+"</p><p>Salty: "+data.flavors.Salty+"</p><p>Sour :"+data.flavors.Sour+"</p><p>Sweet:"+data.flavors.Sweet+"</p>");
+   $(".myIngredients").append("Ingredients: "+ data.ingredientLines);
+   $(".final").append("<a target='_blank' href="+data.source.sourceRecipeUrl+">"+"How to Make it!"+"</a>");
+   var btn = "<a class= 'btn1' href='/favorite'>Victory Page</a>";
+   var restart = "<a class= 'btn2' href='/home'>Play Again</a>";
+   $(".thisButton").append(btn);
+   $(".thisButton").append(restart);
+   $(window).scrollTop($(".detailContainer").offset().top);
+   // $("body").animate({scrollTop: $(".detailContainer").offset().top }, 2000);
    //AJAX allows me to do app.post
    $.ajax({
       type:"POST",

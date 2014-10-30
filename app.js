@@ -9,6 +9,7 @@ var express = require('express'),
     cookieParser = require("cookie-parser"),
     session = require("cookie-session"),
     flash = require("connect-flash"),
+    async = require("async"),
     yelp = require("yelp").createClient({
       consumer_key: "hpYc3S2PYsXIXVjgATHYQQ",
       consumer_secret: "d_gBYLzYlYptfv6sWNzxTkRShTQ",
@@ -16,6 +17,9 @@ var express = require('express'),
       token_secret: "xtIvSjixBg9ykXWv5dwz9rmamnE"});
     var morgan = require('morgan');
     var routeMiddleware = require("./config/routes");
+    var geocoderProvider = 'google';
+    var httpAdapter = 'http';
+    var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter);
    
 
 
@@ -160,10 +164,10 @@ app.delete('/favorite/:id', function(req,res){
 
 
 // Searching for recipes
-app.get('/search', function(req,res) { 
+app.get('/search',routeMiddleware.checkAuthentication, function(req,res) { 
   var number = Math.floor((Math.random() * 350) + 1);
   var searchTerm = req.query.foodTitle;
-  var url ="http://api.yummly.com/v1/api/recipes?_app_id=d38fff6d&_app_key=effa46e418efdd042f6866b93906a8d0&q=" + searchTerm + "&maxResult=50&start="+number;
+  var url ="http://api.yummly.com/v1/api/recipes?_app_id=d38fff6d&_app_key=effa46e418efdd042f6866b93906a8d0&q=" + searchTerm + "&maxResult=20&start="+number;
 
   request(url, function(error,response, body){
     if(!error && response.statusCode === 200){
@@ -175,7 +179,7 @@ app.get('/search', function(req,res) {
 
 
 //Lists out the details of the receipe I chose) Ingredient
-app.get('/details/:id', function(req,res) { 
+app.get('/details/:id',routeMiddleware.checkAuthentication, function(req,res) { 
   var detailTerm = req.params.id;
   var url ="http://api.yummly.com/v1/api/recipe/"+detailTerm+"?_app_id=d38fff6d&_app_key=effa46e418efdd042f6866b93906a8d0";
   request(url, function (error, response, body){
@@ -186,13 +190,39 @@ app.get('/details/:id', function(req,res) {
   });
 });
 
-app.get('/yelp', function(req,res) { 
+
+app.get('/yelp',routeMiddleware.checkAuthentication, function(req,res) { 
   var searchTerm = req.query.yelpTitle;
   yelp.search({term: searchTerm, location: "San Francisco"}, function(error, data) {
-    console.log(error);
-    console.log(data);
-    res.render("yelp",{yelpList: data.businesses});
+    var coords = [];
+    async.forEach(data.businesses, function(location,callback){
+      geocoder.geocode({address: location.location.address, country: location.location.country_code, zipcode: location.location.postal_code}, function(err, resser){
+      // console.log("RZA?", resser);
+      if(resser !== undefined){
+        resser.forEach(function(data){
+          console.log("THIS IS DA LONG", data.longitude);
+          console.log("THIS IS DA LAT", data.latitude);
+          coords.push({yelpLat: data.latitude, yelpLong: data.longitude, yelpName: location.name, yelpAddress: location.location.address, yelpPic: location.image_url, yelpRat: location.rating_img_url, yelpUrl: location.url});
+        });
+        callback();
+        }
+       else{
+           callback(); 
+          }  
+      });
+    },
+    function(){
+      res.render("map",{coords:JSON.stringify(coords)});
+    });
   });
+});
+
+app.get('/about', function(req,res) { //My about page
+  res.render('about');
+});
+
+app.get('/contact', function(req, res) { // My contact page
+  res.render('contact');
 });
 
 var server = app.listen(3000, function() {

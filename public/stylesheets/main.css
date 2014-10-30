@@ -25,6 +25,18 @@
   background-color: rgba(0,0,0,0.4);
 }
 
+.bottom { /*Footer on the bottom keep it fixed  */
+  /*position: fixed;*/
+  bottom: 0;
+  margin-top: 250px;
+  padding: 12px 24px;
+  color: #999999;
+}
+
+.navbar {
+  margin-bottom: 0px;
+}
+
 .homePage{
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
@@ -139,6 +151,9 @@
   border: none;
 }
 
+.signPage .create:hover {
+  background-color: #AB3919;
+}
 .logPage .logLead {
   margin-top: 50px;
   font-size: 20px;
@@ -182,13 +197,211 @@
   border: none;
 }
 
+.logPage .log:hover {
+  background-color: #0B7275;
+}
+
+
+
+
+
+
 
 /*HOME PAGE*/
+.intro {
+  font-size: 34px;
+  text-align: center;
+}
+.searchBar {
+  padding: 24px; /* Space around the container */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #4A90E2;
+  width: 100%; /* Extend the whole width of the browser subtracting the sidebar */
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1); /*Shadow for the text */
+}
+
+.searchBar .search{
+  border-radius: 50px; /* Nice Circle Shade */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 5px 10px; /* Gives text input some space */
+  outline: none; /* Takes away highlighted outline */
+}
+.searchBar .searchMap{
+  border-radius: 50px; /* Nice Circle Shade */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 5px 10px; /* Gives text input some space */
+  outline: none; /* Takes away highlighted outline */
+}
+.searchBar .submit { /* So you can't see the submit button */
+  display: none;
+}
+
+.myButtons {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.myButtons .category {
+  background-color: #D74820;
+  padding: 12px;
+  margin: 24px 20px;
+  width: 220px;
+  height: 72px;
+  font-size: 32px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+}
+
+.myButtons .category:hover {
+  background-color: #AB3919;
+}
+
+.thisButton {
+  text-align: center;
+}
+
+.thisButton .btn1 {
+  background-color: #D74820;
+  padding: 12px;
+  margin: 24px 20px;
+  width: 220px;
+  height: 72px;
+  font-size: 32px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+}
+.thisButton .btn2 {
+  background-color: #0E9094;
+  padding: 12px;
+  margin: 24px 20px;
+  width: 220px;
+  height: 72px;
+  font-size: 32px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+}
+
+.thisButton .btn1:hover {
+  background-color: #AB3919;
+}
+
+.thisButton .btn2:hover {
+  background-color: #0B7275;  
+}
+
+.recipes {
+  margin-top: 35px;
+}
+.recipes .round {
+  font-weight: bold;
+  font-size: 45px;
+}
+.recipes .recipe {
+  display: inline-block;
+}
+.recipe {
+  padding:20px 20px 0;
+}
+.win {
+  font-size: 45px;
+  font-weight: bold;
+}
+/*RESULTS PAGE*/
+
+.results ul { /* Resets given margins and padding */
+  margin: 0;
+  padding: 0;
+  list-style-type: none; /* Removes bullet points */
+}
+
+
+/* For the lists that come out in favorites and search page */
+.results li {
+  border-bottom: 1px solid #CCCCCC;
+  clear: both;
+  padding: 24px;
+}
+
+.food .title {
+  float: left;
+  font-size: 32px;
+  color: #4A4A4A;
+}
+.food .course {
+  float: right;
+  font-size: 32px;
+  color: #9b9b9b;
+}
+
+.food .rating {
+  float: right;
+  font-size: 32px;
+  color: #9b9b9b;
+}
+
+.results li:hover {
+  background-color: #F0F0F0;
+}
 
 
 
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
 
 
+/*Details PAGE*/
+.detailContainer { /* Give's it consistent padding */
+  padding: 5px 24px;
+}
+
+.detailContainer .title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #4A4A4A;
+}
+
+.detailContainer .myRating {
+  font-size: 26px;
+}
+.detailContainer .cals {
+  font-size: 26px;
+}
+.flavors {
+  font-size: 26px;
+}
+.flavors p {
+  margin-bottom: 0;
+  font-size: 18px;
+  padding-left: 9px;
+}
+.myIngredients {
+  font-size: 18px;
+}
+
+.final {
+  text-align: center;
+  font-size: 28px;
+}
 
 
 footer {

@@ -1,6 +1,58 @@
-<% include partials/header %>
+<% include partials/home.ejs %>
 
+<div class="content" style="float: left;width: 50%; margin-top: 70px background-color: #384452;">
+  <div class="searchBar">
+    <form action="/search" class="awesomeSauce">
+      <input type="text" id="foodTitle" name="foodTitle" autofocus placeholder="Search for a Recipe?" class="search" 
+      <input type="submit" class="submit">
+    </form>
+  </div>
+</div>
 
-<p>Ingredients: <%= detailList.ingredientLines %></p>
+<div class="content" style="width: 50%; float: RIGHT; margin-top: 70px">
+  <div class="searchBar" style="background-color: #384452;;">
+    <form action="/yelp" class="awesomeSauce">
+      <input type="text" id="yelpTitle" name="yelpTitle" autofocus placeholder="Search for a Restraunt?" class="search" 
+      <input type="submit" class="submit">
+    </form>
+  </div>
+</div>
+<br>
+<br>
 
-<% include partials/footer %>
+<div class="detailContainer" style="clear:both; margin-top:8px;">
+ <div class="bigPic" style="float: right;">
+    <img class = 'img-thumbnail' src =<%= detailList.images[0].hostedLargeUrl %>>
+  </div>
+  <div>
+    <div class="title">
+      <%= detailList.name %>
+    </div>
+    <div class="myRating">
+      Rating: <%= detailList.rating %>
+    </div>
+    <div class="cals">
+      Calories: <%= detailList.nutritionEstimates[0].value %>
+     </div>
+    <div class="flavors">
+      Flavors:
+      <p> Bitter: <%= detailList.flavors.Bitter %></p> 
+      <p> Meaty: <%= detailList.flavors.Meaty %></p>
+      <p> Salty: <%= detailList.flavors.Salty %></p>
+      <p> Sour: <%= detailList.flavors.Sour %></p>
+      <p> Sweet: <%= detailList.flavors.Sweet %> </p>
+    </div>
+  </div>
+  <br>
+  <div class="myIngredients">
+    Ingredients: <%= detailList.ingredientLines %>
+  </div>
+  <br>
+  <div class="final">
+    <a target='_blank' href=<%= detailList.source.sourceRecipeUrl %>>Learn How to Make it!</a>
+  </div>
+  <br>
+</div>
+
+<% include partials/newFooter.ejs %>
+

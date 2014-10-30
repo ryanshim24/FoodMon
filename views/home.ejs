@@ -1,113 +1,150 @@
-<% include partials/header %>
-<link rel="stylesheet" href="stylesheets/main.css">
-<link rel="stylesheet" href="stylesheets/sidebar.css">
-<script src = "javascripts/main.js"></script>
+<% include partials/home.ejs %>
+  
+  <!-- *****************************************************************************************************************
+   HEADERWRAP
+   ***************************************************************************************************************** -->
 
-<div class="navbar navbar-top" role="navigation">
-  <div class="container">       
-   <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    <a class="navbar-brand" href="/">Foodmon</a>
+<div id="headerwrap">
+  <div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <h1>Need some help??</h1>
+      <h3>Go ahead and click a Category!</h3>     
     </div>
-    <div class="navbar-collapse collapse" style="height: 1px;">
-      <ul class = "nav navbar-nav navbar-right">
-        <li><a href="/">Home</a></li>
-        <li><a href="/favorite">Victory</a></li>
-        <li><a href="/about">About Us</a></li>
-        <li><a href="/contact">Contact Us</a></li>
-      </ul>
+    <div class="col-lg-8 col-lg-offset-2">
+      <div class="myButtons">
+        <a class="category" href="/search?foodTitle=Breakfast">Breakfast</a>
+        <a class="category" href="/search?foodTitle=Lunch">Lunch</a>
+        <a class="category" href="/search?foodTitle=Dinner">Dinner</a>
+        <a class="category" href="/search?foodTitle=Dessert">Dessert</a>
+      </div>
+      <br>
+      <h1>Or!</h1>
+      <h3>Search for something Specific!</h3> 
+      <br>
     </div>
+    <div class="col-lg-12">
+      <div class="col-lg-6">
+        <div class="searchBar" style="border-radius: 5px;background: none;border-bottom: 0;box-shadow: 0px 0px 0px;">
+          <form action="/search" class="awesomeSauce">
+            <input type="text" id="foodTitle" name="foodTitle" autofocus placeholder="Search for a Recipe?" class="search" 
+            <input type="submit" class="submit">
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="searchBar" style="border-radius: 5px;background: none;border-bottom: 0;box-shadow: 0px 0px 0px;">
+          <form action="/yelp" class="awesomeSauce">
+            <input type="text" id="yelpTitle" name="yelpTitle" autofocus placeholder="Search for a Restraunt?" class="search" 
+            <input type="submit" class="submit">
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div><!-- /row -->
+  </div> <!-- /container -->
+</div><!-- /headerwrap -->
+
+
+  <!-- *****************************************************************************************************************
+   SERVICE LOGOS
+   ***************************************************************************************************************** -->
+
+<div id="service">
+  <div class="container">
+    <div class = "recipes text-center">
+      <div class="round"></div>
+      <div class="recipe1 recipe"></div>
+      <div class="recipe2 recipe"></div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="yolo"></div>
+    </div>
+  </div>
+  <div class="detailContainer">
+    <br>
+    <div class="win text-center"></div>  
+    <div class="bigPic" style="float: right;"></div>
+    <div>
+      <div class="title"></div>
+      <div class="myRating"></div>
+      <div class="cals"></div>
+      <div class="flavors"></div>
+    </div>
+    <br>
+    <div class="myIngredients"></div>
+    <br>
+    <div class="final"></div>
+    <br>
+    <br>
+    <div class="thisButton"></div>
   </div>
 </div>
-<!-- <div id="wrapper">
 
 
-  <div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-        <a href="#">
-          Start Bootstrap
-        </a>
-      </li>
-      <li>
-        <a href="#">Dashboard</a>
-      </li>
-      <li>
-        <a href="#">Shortcuts</a>
-      </li>
-      <li>
-        <a href="#">Overview</a>
-      </li>
-      <li>
-        <a href="#">Events</a>
-      </li>
-      <li>
-        <a href="#">About</a>
-      </li>
-      <li>
-        <a href="#">Services</a>
-      </li>
-      <li>
-        <a href="#">Contact</a>
-      </li>
-    </ul>
-  </div> -->
 
 
-  <div id="page-content-wrapper">
-    <div class="container-fluid">
-      <h1>Hello, <%= user.username %> - welcome to our website.</h1>
-
-      <a href="/logout" class="btn btn-danger">Log out here!</a>
-      <br>
-      <br>
-      <!-- <p>
-
-      <form action="/search" class = "awesomeSauce">
-        <input type="text" id = "foodTitle" name="foodTitle">
-        <input type="submit">
-      </form>
-      </p>
-      <p>
-
-      <form action="/yelp" class = "awesomeTaco">
-        <input type="text" id = "yelpTitle" name="yelpTitle">
-        <input type="submit">
-      </form>
-      </p> -->
-
-      <a class="btn btn-primary category" href="/search?foodTitle=Breakfast">Breakfast</a>
-      <a class="btn btn-primary category" href="/search?foodTitle=Lunch">Lunch</a>
-      <a class="btn btn-primary category" href="/search?foodTitle=Dinner">Dinner</a>
-      <a class="btn btn-primary category" href="/search?foodTitle=Dessert">Dessert</a>
-
-
-      <div class = "recipes">
-        <div class="round"></div>
-        <div class="recipe1 recipe"></div>
-        <div class="recipe2 recipe"></div>
-      </div>
-
-      <div class="info">
-        <div class="title"></div>
-        <div class="picture"></div>
-        <div class="ingredient"></div>
-        <div class="method"></div>
-        <div class="name"></div>
-        
+  <!-- *****************************************************************************************************************
+   FOOTER
+   ***************************************************************************************************************** -->
+   <div id="footerwrap">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <h4>About</h4>
+          <div class="hline-w"></div>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+        </div>
+        <div class="col-lg-4">
+          <h4>Social Links</h4>
+          <div class="hline-w"></div>
+          <p>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-envelope"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+          </p>
+        </div>
+        <div class="col-lg-4">
+          <h4>My Crib</h4>
+          <div class="hline-w"></div>
+          <p>
+            25 Wayne Place,<br/>
+            23890, San Fran,<br/>
+            United States.<br/>
+          </p>
+        </div>
+      
       </div>
     </div>
-  </div>
-<!-- </div> -->
+   </div>
+
+
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/retina-1.1.0.js"></script>
+    <script src="assets/js/jquery.hoverdir.js"></script>
+    <script src="assets/js/jquery.hoverex.min.js"></script>
+    <script src="assets/js/jquery.prettyPhoto.js"></script>
+    <script src="assets/js/jquery.isotope.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+
+
+
+
+
 
 
 <script type="text/javascript">
   $(document).ready(function(){
+    $(window).scrollTop($(".navbar").offset().top);
     //Click on soups button
     $(".category").on("click", foodMon.categoryClick);
     //When one of the recipe class is clicked
@@ -119,9 +156,6 @@
   });
 </script>
 
-
-
- 
-
-<% include partials/footer %>
+</body>
+</html>
 
