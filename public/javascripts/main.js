@@ -13,7 +13,7 @@ foodMon.categoryClick = function(e){
   foodMon.category = this.innerText;
   console.log(this.innerText);
   //Goes through api with the searchTerm Soups starts at random place
-  var url= "https://api.yummly.com/v1/api/recipes?_app_id=d38fff6d&_app_key=effa46e418efdd042f6866b93906a8d0&q=" + foodMon.category + "&maxResult=2&start="+number;
+  var url= "https://api.yummly.com/v1/api/recipes?_app_id=d38fff6d&_app_key="+yummly+"&q=" + foodMon.category + "&maxResult=2&start="+number;
   //We do JSON in order to get the recipe object of what we searched for
   $.getJSON(url, function(data){
     var rec1 = data.matches[0];
@@ -93,7 +93,7 @@ foodMon.declareWinner = function(winNum){
   var nacho = JSON.parse(taco);
   var detail = nacho.id;
   //Make another api call
-  var url ="https://api.yummly.com/v1/api/recipe/"+detail+"?_app_id=d38fff6d&_app_key=effa46e418efdd042f6866b93906a8d0";
+  var url ="https://api.yummly.com/v1/api/recipe/"+detail+"?_app_id=d38fff6d&_app_key="+yummly;
 
   //
   $.getJSON(url, function(data){

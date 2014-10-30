@@ -76,7 +76,7 @@
  var tacoSauce =<%- coords %>
            
 
-L.mapbox.accessToken = 'pk.eyJ1IjoicnlhbnNoaW0yNCIsImEiOiJHbUJOTDB3In0.pGTZm9ZhCDZzF3U4hFaB5w';
+L.mapbox.accessToken = "<%= process.env.MAPBOX_ACCESS_TOKEN %>";
 // Create a map in the div #map
 var map = L.mapbox.map('map', 'ryanshim24.k2onedbd').setView([37.777538, -122.437986], 13);;
 

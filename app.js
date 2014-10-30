@@ -11,10 +11,10 @@ var express = require('express'),
     flash = require("connect-flash"),
     async = require("async"),
     yelp = require("yelp").createClient({
-      consumer_key: "hpYc3S2PYsXIXVjgATHYQQ",
-      consumer_secret: "d_gBYLzYlYptfv6sWNzxTkRShTQ",
-      token: "8IoJkXkJPIaWFIGV9UodUSnU8QxMWGIb",
-      token_secret: "xtIvSjixBg9ykXWv5dwz9rmamnE"});
+      consumer_key: process.env.YELP_CONSUMER_KEY,
+      consumer_secret: process.env.YELP_CONSUMER_SECRET,
+      token: process.env.YELP_TOKEN,
+      token_secret: process.env.YELP_TOKEN_SECRET});
     var morgan = require('morgan');
     var routeMiddleware = require("./config/routes");
     var geocoderProvider = 'google';
@@ -167,7 +167,7 @@ app.delete('/favorite/:id', function(req,res){
 app.get('/search',routeMiddleware.checkAuthentication, function(req,res) { 
   var number = Math.floor((Math.random() * 350) + 1);
   var searchTerm = req.query.foodTitle;
-  var url ="https://api.yummly.com/v1/api/recipes?_app_id=d38fff6d&_app_key=effa46e418efdd042f6866b93906a8d0&q=" + searchTerm + "&maxResult=20&start="+number;
+  var url ="https://api.yummly.com/v1/api/recipes?_app_id=d38fff6d&_app_key="+process.env.YUMMLY_API_KEY+"&q=" + searchTerm + "&maxResult=20&start="+number;
 
   request(url, function(error,response, body){
     if(!error && response.statusCode === 200){
@@ -181,7 +181,7 @@ app.get('/search',routeMiddleware.checkAuthentication, function(req,res) {
 //Lists out the details of the receipe I chose) Ingredient
 app.get('/details/:id',routeMiddleware.checkAuthentication, function(req,res) { 
   var detailTerm = req.params.id;
-  var url ="https://api.yummly.com/v1/api/recipe/"+detailTerm+"?_app_id=d38fff6d&_app_key=effa46e418efdd042f6866b93906a8d0";
+  var url ="https://api.yummly.com/v1/api/recipe/"+detailTerm+"?_app_id=d38fff6d&_app_key="+process.env.YUMMLY_API_KEY+"";
   request(url, function (error, response, body){
     if(!error && response.statusCode === 200) {
       var obj1 = JSON.parse(body);
