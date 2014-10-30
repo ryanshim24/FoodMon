@@ -1,24 +1,52 @@
-<% include partials/home.ejs %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/assets/ico/favicon.ico">
 
-<div class="content" style="float: left;width: 50%; margin-top: 70px background-color: #384452;">
-  <div class="searchBar">
-    <form action="/search" class="awesomeSauce">
-      <input type="text" id="foodTitle" name="foodTitle" autofocus placeholder="Search for a Recipe?" class="search" 
-      <input type="submit" class="submit">
-    </form>
-  </div>
-</div>
+    <title>HOME PAGE</title>
 
-<div class="content" style="width: 50%; float: RIGHT; margin-top: 70px">
-  <div class="searchBar" style="background-color: #384452;;">
-    <form action="/yelp" class="awesomeSauce">
-      <input type="text" id="yelpTitle" name="yelpTitle" autofocus placeholder="Search for a Restraunt?" class="search" 
-      <input type="submit" class="submit">
-    </form>
-  </div>
-</div>
-<br>
-<br>
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+
+    
+    <script src="/assets/js/modernizr.js"></script>
+    <script src = "javascripts/main.js"></script>
+  </head>
+
+<body>
+
+<!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/home">FoodMon</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/favorite">Victory</a></li>
+            <li><a href="/about">About Me</a></li>
+            <li><a href="/contact">Contact Me</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div> 
 
 <div class="detailContainer" style="clear:both; margin-top:8px;">
  <div class="bigPic" style="float: right;">
