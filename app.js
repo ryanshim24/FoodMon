@@ -167,7 +167,7 @@ app.delete('/favorite/:id', function(req,res){
 app.get('/search',routeMiddleware.checkAuthentication, function(req,res) { 
   var number = Math.floor((Math.random() * 350) + 1);
   var searchTerm = req.query.foodTitle;
-  var url ="http://api.yummly.com/v1/api/recipes?_app_id=d38fff6d&_app_key=effa46e418efdd042f6866b93906a8d0&q=" + searchTerm + "&maxResult=20&start="+number;
+  var url ="https://api.yummly.com/v1/api/recipes?_app_id=d38fff6d&_app_key=effa46e418efdd042f6866b93906a8d0&q=" + searchTerm + "&maxResult=20&start="+number;
 
   request(url, function(error,response, body){
     if(!error && response.statusCode === 200){
@@ -181,7 +181,7 @@ app.get('/search',routeMiddleware.checkAuthentication, function(req,res) {
 //Lists out the details of the receipe I chose) Ingredient
 app.get('/details/:id',routeMiddleware.checkAuthentication, function(req,res) { 
   var detailTerm = req.params.id;
-  var url ="http://api.yummly.com/v1/api/recipe/"+detailTerm+"?_app_id=d38fff6d&_app_key=effa46e418efdd042f6866b93906a8d0";
+  var url ="https://api.yummly.com/v1/api/recipe/"+detailTerm+"?_app_id=d38fff6d&_app_key=effa46e418efdd042f6866b93906a8d0";
   request(url, function (error, response, body){
     if(!error && response.statusCode === 200) {
       var obj1 = JSON.parse(body);
