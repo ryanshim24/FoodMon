@@ -1,9 +1,34 @@
 <% include partials/home.ejs %>
 
+<script >
+$(document).ready(function(){
+
+  $(".deleteForm").on("submit", function(e) {
+    e.preventDefault()
+    var id = $(this).attr("action")
+    var num = id.match(/[1-9][0-9]|[0-9]/)
+    var url = "/favorite/"+num
+    var that = $(this)
+    $.ajax({
+        url: url,
+        type: 'DELETE',
+        success: function(result) {
+            that.closest('div').remove()
+            console.log("It's gone!")
+        },
+        error: function(data){
+          console.log("Oops! Something went wrong..", data)
+        }
+    });
+  });
+})
+
+</script>
+
 <div class="content" style="float: left;width: 50%; margin-top: 70px; background-color: #384452;">
   <div class="searchBar">
     <form action="/search" class="awesomeSauce">
-      <input type="text" id="foodTitle" name="foodTitle" autofocus placeholder="Search for a Recipe?" class="search" 
+      <input type="text" id="foodTitle" name="foodTitle" autofocus placeholder="Search for a Recipe?" class="search"
       <input type="submit" class="submit">
     </form>
   </div>
@@ -12,7 +37,7 @@
 <div class="content" style="width: 50%; float: RIGHT; margin-top: 70px">
   <div class="searchBar" style="background-color: #384452;">
     <form action="/yelp" class="awesomeSauce">
-      <input type="text" id="yelpTitle" name="yelpTitle" autofocus placeholder="Search for a Restaruant?" class="search" 
+      <input type="text" id="yelpTitle" name="yelpTitle" autofocus placeholder="Search for a Restaruant?" class="search"
       <input type="submit" class="submit">
     </form>
   </div>
@@ -36,7 +61,7 @@
     <% if(index % 4 === 0) {%>
     </div>
     <div class="row">
-       
+
       <div class="col-lg-3  thumbnail">
         <img class="img-thumbnail" src="<%= JSON.parse(food.recipe).images[0].hostedLargeUrl %>" alt="">
         <h3><%= JSON.parse(food.recipe).name %></h3>
@@ -45,13 +70,13 @@
           <li><a target="_blank" href="<%= JSON.parse(food.recipe).source.sourceRecipeUrl %>">How to Make it!</a></li>
           |
           <li>
-            <form action="/favorite/<%= food.id %>?_method=delete" method="post">
+            <form class ="deleteForm" action="/favorite/<%= food.id %>?_method=delete" method="post">
               <button type="submit" class="btn btn-danger">Delete</button>
             </form>
           </li>
         </ul>
       </div>
-    
+
     <% } else { %>
       <div class="col-lg-3 thumbnail">
         <img class="img-thumbnail" src="<%= JSON.parse(food.recipe).images[0].hostedLargeUrl %>" alt="">
@@ -61,7 +86,7 @@
           <li><a target="_blank" href="<%= JSON.parse(food.recipe).source.sourceRecipeUrl %>">How to Make it!</a></li>
           |
           <li>
-            <form action="/favorite/<%= food.id %>?_method=delete" method="post">
+            <form class ="deleteForm" action="/favorite/<%= food.id %>?_method=delete" method="post">
               <button type="submit" class="btn btn-danger">Delete</button>
             </form>
           </li>
@@ -72,22 +97,4 @@
   </div>
   </div>
 
-<script type="text/javascript">
-  var id ="<%= food.id %>"
-  $("form").on("submit", function() {
-    $.ajax({ 
-        url: "/favorite/"+id, 
-        type: 'DELETE', 
-        success: function(result) { 
-            $(".thumbnail").remove()
-        } 
-    });  
-});
-</script>
-
-
   <% include partials/newFooter.ejs %>
-
-
-
-

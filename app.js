@@ -99,7 +99,7 @@ app.get('/home',routeMiddleware.checkAuthentication, function(req,res){
 
 
 // When the user submits the signup form
-app.post('/signup', function(req,res) { 
+app.post('/signup', function(req,res) {
   db.User.createNewUser(req.body.username, req.body.password,
     //err
     function(error){
@@ -107,9 +107,11 @@ app.post('/signup', function(req,res) {
     },
     //success
     function (success){
-      res.render("index",{message:success.message});
+      passport.authenticate('local')(req,res,function(){
+        res.redirect('/home');
+      });
     }
-    );
+  );
 });
 
 
@@ -157,9 +159,9 @@ app.delete('/favorite/:id', function(req,res){
   db.Food.find(req.params.id).done(function(err,food){
    db.User.find(req.user.id).done(function(err,user){
     user.removeFood(food);
-    res.redirect('/favorite');
+    res.send('cya!');
     });
-  });  
+  });
 });
 
 
