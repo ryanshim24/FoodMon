@@ -115,7 +115,7 @@ foodMon.declareWinner = function(winNum){
    $(".thisButton").append(restart);
    $(window).scrollTop($(".detailContainer").offset().top);
    // $("body").animate({scrollTop: $(".detailContainer").offset().top }, 2000);
-   //AJAX allows me to do app.post
+   //AJAX allows me to do app.post to take the data and send it to the back end.
    $.ajax({
       type:"POST",
       url: "/favorite",

@@ -195,6 +195,7 @@ app.get('/yelp',routeMiddleware.checkAuthentication, function(req,res) {
   var searchTerm = req.query.yelpTitle;
   yelp.search({term: searchTerm, location: "San Francisco"}, function(error, data) {
     var coords = [];
+    //async allows me to go through the whole array before it moves on
     async.forEach(data.businesses, function(location,callback){
       geocoder.geocode({address: location.location.address, country: location.location.country_code, zipcode: location.location.postal_code}, function(err, resser){
       // console.log("RZA?", resser);
