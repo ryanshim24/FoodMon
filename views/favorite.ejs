@@ -72,6 +72,20 @@
   </div>
   </div>
 
+<script type="text/javascript">
+  var id ="<%= food.id %>"
+  $("form").on("submit", function() {
+    $.ajax({ 
+        url: "/favorite/"+id, 
+        type: 'DELETE', 
+        success: function(result) { 
+            $(".thumbnail").remove()
+        } 
+    });  
+});
+</script>
+
+
   <% include partials/newFooter.ejs %>
 
 
