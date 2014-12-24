@@ -1,3 +1,4 @@
+
 var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
@@ -20,7 +21,7 @@ var express = require('express'),
     var geocoderProvider = 'google';
     var httpAdapter = 'http';
     var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter);
-   
+
 
 
 // Middleware for ejs, grabbing HTML and including static files
@@ -82,12 +83,12 @@ app.get('/',routeMiddleware.preventLoginSignup, function(req, res){
 });
 
 //Sign up Page
-app.get('/signup',routeMiddleware.preventLoginSignup, function(req,res) { 
+app.get('/signup',routeMiddleware.preventLoginSignup, function(req,res) {
   res.render("signup", { username: ""});
 });
 
 //Log in Page
-app.get('/login',routeMiddleware.preventLoginSignup, function(req,res) { 
+app.get('/login',routeMiddleware.preventLoginSignup, function(req,res) {
   res.render("login", { message:req.flash('loginMessage'), username:""});
 });
 
@@ -134,7 +135,7 @@ app.get('/logout', function(req, res){
 
 /////////////////Actual INFORMATION////////////////////////////
 //Show
-app.get('/favorite',routeMiddleware.checkAuthentication, function(req,res) { 
+app.get('/favorite',routeMiddleware.checkAuthentication, function(req,res) {
   db.User.find({where:{id: req.user.id}}).done(function(error,peep){
     peep.getFoods().done(function(error,foods){
       res.render('favorite',{allFoods: foods});
@@ -166,7 +167,7 @@ app.delete('/favorite/:id', function(req,res){
 
 
 // Searching for recipes
-app.get('/search',routeMiddleware.checkAuthentication, function(req,res) { 
+app.get('/search',routeMiddleware.checkAuthentication, function(req,res) {
   var number = Math.floor((Math.random() * 350) + 1);
   var searchTerm = req.query.foodTitle;
   var url ="https://api.yummly.com/v1/api/recipes?_app_id=d38fff6d&_app_key="+process.env.YUMMLY_API_KEY+"&q=" + searchTerm + "&maxResult=20&start="+number;
@@ -181,7 +182,7 @@ app.get('/search',routeMiddleware.checkAuthentication, function(req,res) {
 
 
 //Lists out the details of the receipe I chose) Ingredient
-app.get('/details/:id',routeMiddleware.checkAuthentication, function(req,res) { 
+app.get('/details/:id',routeMiddleware.checkAuthentication, function(req,res) {
   var detailTerm = req.params.id;
   var url ="https://api.yummly.com/v1/api/recipe/"+detailTerm+"?_app_id=d38fff6d&_app_key="+process.env.YUMMLY_API_KEY+"";
   request(url, function (error, response, body){
@@ -193,9 +194,13 @@ app.get('/details/:id',routeMiddleware.checkAuthentication, function(req,res) {
 });
 
 
-app.get('/yelp',routeMiddleware.checkAuthentication, function(req,res) { 
+app.get('/yelp',routeMiddleware.checkAuthentication, function(req,res) {
   var searchTerm = req.query.yelpTitle;
   yelp.search({term: searchTerm, location: "San Francisco"}, function(error, data) {
+    if (error) {
+      console.log("THERE WAS AN ERROR CALLING YELP!!!");
+      console.log("error object", error);
+    }
     var coords = [];
     //async allows me to go through the whole array before it moves on
     async.forEach(data.businesses, function(location,callback){
@@ -210,8 +215,8 @@ app.get('/yelp',routeMiddleware.checkAuthentication, function(req,res) {
         callback();
         }
        else{
-           callback(); 
-          }  
+           callback();
+          }
       });
     },
     function(){

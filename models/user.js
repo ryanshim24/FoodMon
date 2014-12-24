@@ -41,7 +41,7 @@ module.exports = function (sequelize, DataTypes){
             password: this.encryptPass(password)
           }).done(function(error,user) {
             if(error) {
-              console.log(error)
+              console.log(error);
               if(error.name === 'SequelizeValidationError'){
               err({message: 'Your username should be at least 6 characters long', username: username});
             }
