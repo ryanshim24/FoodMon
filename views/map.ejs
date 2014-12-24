@@ -47,13 +47,13 @@
           </ul>
         </div><!--/.nav-collapse -->
       </div>
-    </div> 
+    </div>
 
 
 <div class="content" style="float: left;width: 50%; margin-top: 70px; background-color: #384452;">
   <div class="searchBar">
     <form action="/search" class="awesomeSauce">
-      <input type="text" id="foodTitle" name="foodTitle" autofocus placeholder="Search for a Recipe?" class="search" 
+      <input type="text" id="foodTitle" name="foodTitle" autofocus placeholder="Search for a Recipe?" class="search"
       <input type="submit" class="submit">
     </form>
   </div>
@@ -62,7 +62,7 @@
 <div class="content" style="width: 50%; float: RIGHT; margin-top: 70px">
   <div class="searchBar" style="background-color: #384452;">
     <form action="/yelp" class="awesomeSauce">
-      <input type="text" id="yelpTitle" name="yelpTitle" autofocus placeholder="Search for a Restaruant?" class="search" 
+      <input type="text" id="yelpTitle" name="yelpTitle" autofocus placeholder="Search for a Restaruant?" class="search"
       <input type="submit" class="submit">
     </form>
   </div>
@@ -74,7 +74,7 @@
 
  <script>
  var tacoSauce =<%- coords %>
-           
+
 
 L.mapbox.accessToken = "<%= process.env.MAPBOX_ACCESS_TOKEN %>";
 // Create a map in the div #map
@@ -110,6 +110,10 @@ tacoSauce.forEach(function(taco){
     map.featureLayer.on('click', function(e) {
         map.panTo(e.layer.getLatLng());
     });
+    map.dragging.disable();
+  map.touchZoom.disable();
+  map.doubleClickZoom.disable();
+  map.scrollWheelZoom.disable();
 });
 
 
