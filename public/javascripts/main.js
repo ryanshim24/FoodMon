@@ -6,7 +6,7 @@ foodMon.category = "";
 
 // FUNCTION DECLARATIONS
 foodMon.categoryClick = function(e){
-  counter = 1; 
+  counter = 1;
   e.preventDefault();
   //random number
   var number = Math.floor((Math.random() * 300) + 1);
@@ -16,6 +16,7 @@ foodMon.categoryClick = function(e){
   var url= "https://api.yummly.com/v1/api/recipes?_app_id=d38fff6d&_app_key="+yummly+"&q=" + foodMon.category + "&maxResult=2&start="+number;
   //We do JSON in order to get the recipe object of what we searched for
   $.getJSON(url, function(data){
+    console.log(data.matches);
     var rec1 = data.matches[0];
     var rec2 = data.matches[1];
 
@@ -31,7 +32,7 @@ foodMon.categoryClick = function(e){
     var img2 = "<img style = 'width:200px' class = 'img-circle' src =" + rec2.imageUrlsBySize[90] +">";
     //I append img1 into the class recipe1/2
     //empty() clears all child nodes so it's always clean from the start
-    $('.recipe1').empty().append(img1); 
+    $('.recipe1').empty().append(img1);
     $('.recipe2').empty().append(img2);
 
     var round = "Round 1 <br> <h4>Which would you rather prefer?</h4>";
@@ -74,7 +75,7 @@ foodMon.recipeClick = function(e) {
   //When the counter hit's five the next clikc is the winner!
   if (counter === 6) {
     if ($(clicked).hasClass("recipe1")){
-      foodMon.declareWinner(1);  
+      foodMon.declareWinner(1);
     } else {
       foodMon.declareWinner(2);
     }
@@ -97,7 +98,7 @@ foodMon.declareWinner = function(winNum){
 
   //
   $.getJSON(url, function(data){
-  // I append the ingredient lines and image into 
+  // I append the ingredient lines and image into
   //the div class info!
    var title = "Victory!!!";
    $(".win").append(title);
@@ -123,7 +124,7 @@ foodMon.declareWinner = function(winNum){
     })
       .done(function(msg){
         console.log("Data Saved" + msg);
-      }); 
+      });
   });
 };
 
