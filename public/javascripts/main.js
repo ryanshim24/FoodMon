@@ -16,24 +16,22 @@ foodMon.categoryClick = function(e){
   var url= "https://api.yummly.com/v1/api/recipes?_app_id=d38fff6d&_app_key="+yummly+"&q=" + foodMon.category + "&maxResult=2&start="+number;
   //We do JSON in order to get the recipe object of what we searched for
   $.getJSON(url, function(data){
-    console.log(data.matches);
+    console.log(data);
     var rec1 = data.matches[0];
     var rec2 = data.matches[1];
+    $.getJSON("https://api.yummly.com/v1/api/recipe/"+rec1.id+"?_app_id=d38fff6d&_app_key="+yummly,function(result){
+      rec1 = result;
+      localStorage.setItem('recipe1', JSON.stringify(rec1));
+      var img1 = "<img style = 'width:400px' class = 'img-circle' src =" + rec1.images[0].hostedLargeUrl +">";
+      $('.recipe1').empty().append(img1);
+    });
+    $.getJSON("https://api.yummly.com/v1/api/recipe/"+rec2.id+"?_app_id=d38fff6d&_app_key="+yummly,function(result){
+      rec2 = result;
+      localStorage.setItem('recipe2', JSON.stringify(rec2));
+      var img2 = "<img style = 'width:400px' class = 'img-circle' src =" + rec2.images[0].hostedLargeUrl +">";
+      $('.recipe2').empty().append(img2);
+    });
 
-    // localStorage stuff stores information on the current session!
-    // Great for my app! Thanks Localstorage - you're dope!
-    // key: value Ex) recipe1: now has rec1 information in string form
-    // When I've chosen the victor recipe go to localstorage JSON Parse and get ID
-    localStorage.setItem('recipe1', JSON.stringify(rec1));
-    localStorage.setItem('recipe2', JSON.stringify(rec2));
-
-    //I NOW HAVE ACCESS to the obj so I grab the images
-    var img1 = "<img style = 'width:200px' class = 'img-circle' src =" + rec1.imageUrlsBySize[90] +">";
-    var img2 = "<img style = 'width:200px' class = 'img-circle' src =" + rec2.imageUrlsBySize[90] +">";
-    //I append img1 into the class recipe1/2
-    //empty() clears all child nodes so it's always clean from the start
-    $('.recipe1').empty().append(img1);
-    $('.recipe2').empty().append(img2);
 
     var round = "Round 1 <br> <h4>Which would you rather prefer?</h4>";
     $('.round').empty().append(round);
@@ -56,17 +54,22 @@ foodMon.recipeClick = function(e) {
   foodMon.getRecipe(clicked).success(function(data){
     //tmp is the new recipe object I got from the api call
     var tmp = data.matches[0];
-    //If i clicked recipe1 then I want to change the img attrbiute
+   $.getJSON("https://api.yummly.com/v1/api/recipe/"+tmp.id+"?_app_id=d38fff6d&_app_key="+yummly,function(resu){
+      console.log(resu);
+      //If i clicked recipe1 then I want to change the img attrbiute
     //of recipe2 to the new tmp image and store that information into local
     //storage in case it becomes my victor!
     if ($(clicked).hasClass("recipe1")){
-      $('.recipe2 img').attr('src', tmp.imageUrlsBySize[90]);
+      $('.recipe2 img').attr('src', resu.images[0].hostedLargeUrl);
       localStorage.setItem('recipe2', JSON.stringify(tmp));
     //Else do the opposite
     } else {
-      $('.recipe1 img').attr('src', tmp.imageUrlsBySize[90]);
+      $('.recipe1 img').attr('src', resu.images[0].hostedLargeUrl);
       localStorage.setItem('recipe1', JSON.stringify(tmp));
     }
+
+    });
+
   });
   if (counter === 5){
     round = "Final Round <br><h4>Which would you rather prefer?</h4>";
